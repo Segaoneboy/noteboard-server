@@ -1,10 +1,14 @@
 
 const GetAllCards = (req, res) =>{
+    let counter = 0;
     const { PrismaClient } = require('@prisma/client');
     const prisma = new PrismaClient();
-    prisma.card.findMany()
+    prisma.card.findMany({
+    })
         .then((cards) => {
-            res.status(200).json(cards)
+            cards.map(card => {
+
+            })
         })
         .catch((err) =>{
             console.error("Ошибка при получении карточек", err);
