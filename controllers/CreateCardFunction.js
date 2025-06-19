@@ -7,7 +7,7 @@ const CreateCard = (req, res) => {
     const path = require('path');
 
     const { name, description} = req.body;
-    const image = path.posix.join('uploads', req.file.filename);
+    const image = path.posix.join('tmp', req.file.filename);
     uploadImage(image, req.file.filename)
         .then((imageUrl) => {
             if(!imageUrl){
