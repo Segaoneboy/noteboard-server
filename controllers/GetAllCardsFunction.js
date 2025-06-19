@@ -20,7 +20,7 @@ const GetAllCards = (req, res) =>{
                         cards,
                         total,
                         page,
-                        totalPages: Math.ceil(Math.ceil(total / limit)),
+                        totalPages: Math.ceil(total / limit),
                     })
                 })
                 .catch(err => {
