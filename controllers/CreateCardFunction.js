@@ -7,7 +7,7 @@ const CreateCard = (req, res) => {
     const path = require('path');
 
     const { name, description} = req.body;
-    const image = req.file.filename;
+    const image = req.file.path;
     uploadImage(image, req.file.filename)
         .then((imageUrl) => {
             if(!imageUrl){
