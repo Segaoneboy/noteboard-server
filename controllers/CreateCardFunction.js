@@ -6,7 +6,7 @@ const CreateCard = (req, res) => {
     const fs = require('fs');
     const path = require('path');
 
-    const { name, description} = req.body;
+    const { name, description } = req.body;
     const image = req.file.path;
     uploadImage(image, req.file.filename)
         .then((imageUrl) => {
@@ -29,12 +29,12 @@ const CreateCard = (req, res) => {
                 })
         })
         .then((card)=>{
-            res.status(201).json(card);
+            res.redirect("/?success=1");
 
         })
         .catch((error) =>{
             console.error("Error creating card", error);
-            res.status(500).json({error: "Ошибка сервера"})
+            res.redirect("/?success=0")
         });
 }
 
