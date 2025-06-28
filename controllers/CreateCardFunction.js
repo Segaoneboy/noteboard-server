@@ -29,12 +29,12 @@ const CreateCard = (req, res) => {
                 })
         })
         .then((card)=>{
-            res.redirect("/?success=1");
+            res.status(201).json(card);
 
         })
         .catch((error) =>{
             console.error("Error creating card", error);
-            res.redirect("/?success=0")
+            res.status(500).json(error);
         });
 }
 
