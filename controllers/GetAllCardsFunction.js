@@ -1,12 +1,17 @@
 
 const GetAllCards = (req, res) =>{
-    let counter = 0;
     const { PrismaClient } = require('@prisma/client');
     const prisma = new PrismaClient();
     const limit = 10
     const page = parseInt(req.query.page) || 1;
     const skip = (page-1) * limit;
+    const userId = req.user.id
+    if(!userId) return res.status(401).json({ message: `Пользователь не авторизован` });
+
+
+
     prisma.card.findMany({
+        where: {userId: userId},
         skip: skip,
         take: limit,
         orderBy: {
@@ -14,7 +19,7 @@ const GetAllCards = (req, res) =>{
         }
     })
         .then((cards) => {
-            prisma.card.count()
+            prisma.card.count({where: {userId: userId}})
                 .then(total => {
                     res.status(200).json({
                         cards,
@@ -24,7 +29,7 @@ const GetAllCards = (req, res) =>{
                     })
                 })
                 .catch(err => {
-                    res.status(500).json({ error: 'Ошибка сервера при подсчёте'})
+                    res.status(500).json({ error: `Ошибка сервера при подсчёте, ${err}`})
                 })
         })
         .catch((err) =>{

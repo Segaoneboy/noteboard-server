@@ -1,13 +1,21 @@
 const uploadImage = require("./uploadImage");
+const fs = require('fs');
+const path = require('path');
 
 const CreateCard = (req, res) => {
     const { PrismaClient } = require('@prisma/client');
     const prisma = new PrismaClient();
-    const fs = require('fs');
-    const path = require('path');
+
 
     const { name, description } = req.body;
+    const userId = req.user?.id;
+
+    if(!userId) return res.status(401).json({message: "Пользователь не аутентифицирован"});
+
+    if(req.file) return res.status(400).json({message: "Изображение не загружено"})
+
     const image = req.file.path;
+
     uploadImage(image, req.file.filename)
         .then((imageUrl) => {
             if(!imageUrl){
@@ -25,6 +33,7 @@ const CreateCard = (req, res) => {
                         name,
                         description,
                         image: imageUrl,
+                        userId: userId,
                     },
                 })
         })
