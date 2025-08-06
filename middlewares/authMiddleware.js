@@ -5,7 +5,6 @@ module.exports = function (req, res, next) {
         const token = req.cookies.accessToken
 
         if (!token) {
-            console.log(req.cookies)
             return res.status(401).json({ message: `Access denied. No token provided. ${token}` });
         }
 
