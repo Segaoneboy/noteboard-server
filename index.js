@@ -13,7 +13,7 @@ const port = process.env.PORT
 app.use(cookieParser())
 app.use(express.json());
 app.use(cors({
-    origin: true,
+    origin: "http://localhost:3000",
     credentials: true,
 }));
 app.use('/api/cards/', CreateCard)
