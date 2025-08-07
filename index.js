@@ -13,7 +13,7 @@ const port = process.env.PORT
 app.use(cookieParser())
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000", "https://noteboard-rho.vercel.app"],
+    origin: ["https://noteboard-rho.vercel.app", ],
     credentials: true,
 }));
 app.use('/api/cards/', CreateCard)
