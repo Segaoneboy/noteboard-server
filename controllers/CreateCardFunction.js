@@ -10,9 +10,15 @@ const CreateCard = (req, res) => {
     const { name, description } = req.body;
     const userId = req.user?.id;
 
-    if(!userId) return res.status(401).json({message: "Пользователь не аутентифицирован"});
+    if(!userId){
+        res.status(401).json({message: "Пользователь не аутентифицирован"});
+        return;
+    }
 
-    if(!req.file) return res.status(400).json({message: "Изображение не загружено"})
+    if(!req.file){
+        res.status(400).json({message: "Изображение не загружено"});
+        return;
+    }
 
     const image = req.file.path;
 
