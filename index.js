@@ -4,6 +4,8 @@ const cors = require('cors');
 const CreateCard = require( "./routes/CreateCardRoute")
 const GetAllCardsRoute = require("./routes/GetAllCardsRoute");
 const AuthRoute = require("./routes/AuthRoute");
+const UserRoute = require("./routes/UserRoute");
+
 const cookieParser = require('cookie-parser');
 
 dotenv.config();
@@ -16,9 +18,12 @@ app.use(cors({
     origin: ["https://noteboard-rho.vercel.app", "http://localhost:3000" ],
     credentials: true,
 }));
+
+
 app.use('/api/cards/', CreateCard)
 app.use('/api/cards/', GetAllCardsRoute)
 app.use('/api/auth/', AuthRoute)
+app.use('/api/user/', UserRoute)
 
 
 app.listen(port, () =>{

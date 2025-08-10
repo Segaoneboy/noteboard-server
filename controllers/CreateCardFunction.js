@@ -16,7 +16,7 @@ const CreateCard = (req, res) => {
     }
 
     if(!req.file){
-        res.status(400).json({message: "Изображение не загружено"});
+        res.status(400).json({message: "Изображение не загружено"})
         return;
     }
 
