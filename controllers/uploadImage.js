@@ -24,10 +24,8 @@ function uploadImage(localPath, filename){
                         return reject(error);
 
                     }
-                    const { publicUrl} = supabase
-                        .storage
-                        .from('cards')
-                        .getPublicUrl(filename).data;
+                    const { data } = supabase.storage.from('cards').getPublicUrl(filename);
+                    const publicUrl = data.publicUrl;
                     resolve(publicUrl);
                 })
                 .catch(err => reject(err));
